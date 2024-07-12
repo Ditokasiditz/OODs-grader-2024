@@ -46,38 +46,62 @@ def ManageStack(str):
             if stack.isEmpty():
                 print(-1)
             else :
-                stack.pop()
+                print(f'Pop = {stack.pop()}')
         
         else:
             command ,value = i.split(' ')
-            # print(f'comm={command} valu={value}')
+            value = int(value)
+
             if command == 'A':
                 stack.push(value)
+                print(f'Add = {stack.peek()}')
                 
             elif command == 'D':
                 if stack.isEmpty():
                     print(-1)
                 else:
-                    while not stack.isEmpty() and stack.peek() != value:
-                        temp_stack.push(stack.pop())
-
-                    if not stack.isEmpty() and stack.peek() == value:
-                        stack.pop()
-
+                    while not stack.isEmpty():
+                        if stack.peek() == value:
+                            lastest_pop = stack.pop()
+                            print(f'Delete = {lastest_pop}')
+                        else:
+                            temp_stack.push(stack.pop())
+                    
                     while not temp_stack.isEmpty():
                         stack.push(temp_stack.pop())
 
                     
             elif command == 'LD':
-                pass
-            elif command == 'MD':
-                pass
-        
+                if stack.isEmpty():
+                    print(-1)
+                else:
 
-
-    
+                    while not stack.isEmpty():
+                        if stack.peek() < value:
+                            lastest_pop = stack.pop()
+                            print(f'Delete = {lastest_pop} Because {lastest_pop} is less than {value}')
+                        else:
+                            temp_stack.push(stack.pop())
+                    
+                    while not temp_stack.isEmpty():
+                        stack.push(temp_stack.pop())
 
                 
+            elif command == 'MD':
+                if stack.isEmpty():
+                    print(-1)
+                else:
+
+                    while not stack.isEmpty():
+                        if stack.peek() > value:
+                            lastest_pop = stack.pop()
+                            print(f'Delete = {lastest_pop} Because {lastest_pop} is more than {value}')
+                        else:
+                            temp_stack.push(stack.pop())
+                    
+                    while not temp_stack.isEmpty():
+                        stack.push(temp_stack.pop())
+            
 
     return stack.item 
 
@@ -85,7 +109,7 @@ def ManageStack(str):
 
 inp = input('Enter Input : ')
 
-print(ManageStack(inp))
+print(f'Value in Stack = {ManageStack(inp)}')
 
 
 
