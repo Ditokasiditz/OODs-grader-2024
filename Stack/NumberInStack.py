@@ -11,13 +11,13 @@
 
 class Stack():
     def __init__(self,list = None):
-        if self.item ==None:
+        if list == None:
             self.item = []
         else:
             self.item = list 
 
-    def __str__(self) :
-        return self.item
+    # def __str__(self) :
+    #     return self.item
 
     def push(self,ele):
         self.item.append(ele)
@@ -40,6 +40,7 @@ def ManageStack(str):
     inp_list = [ele for ele in str.split(',') ]
 
     for i in inp_list:
+        print(i)
         if i == 'P'  : 
             if stack.isEmpty():
                 print(-1)
@@ -48,20 +49,26 @@ def ManageStack(str):
         
         else:
             command ,value = i.split(' ')
+            print(f'comm={command} valu={value}')
             if command == 'A':
                 stack.push(value)
             elif command == 'D':
                 if stack.isEmpty():
                     print(-1)
                 else:
-                    stack.item.remove(value)
+                    if value in stack.item:
+                        stack.item.remove(value)
                     
 
                 pass
             elif command == 'LD':
                 pass
             elif command == 'MD':
-                pass 
+                pass
+        
+
+
+    
 
                 
 
@@ -69,14 +76,11 @@ def ManageStack(str):
 
 # Enter Input : A 1,A 2,A 3,A 2,MD 2
 
-inp = 'A 1,A 2,A 3,A 2,MD 2'
+inp = input('Enter Input : ')
 
-list_inp = [ele for ele in inp.split(',') ]
-print(list_inp)
+ManageStack(inp)
 
-m,n ='asd '.split()
-print(m)
-print(n)
+
 
 
 
