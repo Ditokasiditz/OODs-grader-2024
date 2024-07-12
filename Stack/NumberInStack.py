@@ -36,11 +36,12 @@ class Stack():
     
 def ManageStack(str):
     stack = Stack()
+    temp_stack = Stack()
 
     inp_list = [ele for ele in str.split(',') ]
 
     for i in inp_list:
-        print(i)
+        # print(i)
         if i == 'P'  : 
             if stack.isEmpty():
                 print(-1)
@@ -49,18 +50,24 @@ def ManageStack(str):
         
         else:
             command ,value = i.split(' ')
-            print(f'comm={command} valu={value}')
+            # print(f'comm={command} valu={value}')
             if command == 'A':
                 stack.push(value)
+                
             elif command == 'D':
                 if stack.isEmpty():
                     print(-1)
                 else:
-                    if value in stack.item:
-                        stack.item.remove(value)
-                    
+                    while not stack.isEmpty() and stack.peek() != value:
+                        temp_stack.push(stack.pop())
 
-                pass
+                    if not stack.isEmpty() and stack.peek() == value:
+                        stack.pop()
+
+                    while not temp_stack.isEmpty():
+                        stack.push(temp_stack.pop())
+
+                    
             elif command == 'LD':
                 pass
             elif command == 'MD':
@@ -72,13 +79,13 @@ def ManageStack(str):
 
                 
 
-    pass 
+    return stack.item 
 
 # Enter Input : A 1,A 2,A 3,A 2,MD 2
 
 inp = input('Enter Input : ')
 
-ManageStack(inp)
+print(ManageStack(inp))
 
 
 
