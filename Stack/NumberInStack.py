@@ -34,7 +34,37 @@ class Stack():
     def isEmpty(self):
         return self.item == []
     
-def ManageStack():
+def ManageStack(str):
+    stack = Stack()
+
+    inp_list = [ele for ele in str.split(',') ]
+
+    for i in inp_list:
+        if i == 'P'  : 
+            if stack.isEmpty():
+                print(-1)
+            else :
+                stack.pop()
+        
+        else:
+            command ,value = i.split(' ')
+            if command == 'A':
+                stack.push(value)
+            elif command == 'D':
+                if stack.isEmpty():
+                    print(-1)
+                else:
+                    stack.item.remove(value)
+                    
+
+                pass
+            elif command == 'LD':
+                pass
+            elif command == 'MD':
+                pass 
+
+                
+
     pass 
 
 # Enter Input : A 1,A 2,A 3,A 2,MD 2
