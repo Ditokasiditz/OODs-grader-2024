@@ -32,11 +32,7 @@ class Stack():
         return self.item.append(item)
     
     def peek(self):
-        if Stack.isEmpty():
-            top = self.item[-1]
-        else:
-            top = None
-        return top 
+        return self.item[-1]
     
     def isEmpty(self):
         return self.item == []
@@ -45,7 +41,58 @@ class Stack():
         return len(self.item)
     
 
-    
+class StackCalc():
+
+    def __init__(self) -> None:
+        self.stack = Stack()
+         
+
+    def run(self,arg):
+        arg_list = [ele for ele in arg.split()]
+        operator = '+-*/'
+
+        for ele in arg_list:
+            if ele.isdigit() :
+                ele = ele
+                self.stack.push(ele)
+            elif ele in operator:
+                temp1 = int(self.stack.pop())
+                temp2 = int(self.stack.pop())
+                result = 0
+
+                if ele == '+':
+                    result = temp1 + temp2 
+                elif ele == '-':
+                    result = temp1 - temp2
+                elif ele == '*':
+                    result = temp1 * temp2
+                elif ele == '/':
+                    result = int(temp1 / temp2)
+                self.stack.push(str(result))
+            
+            elif ele == 'DUP':
+                self.stack.push(self.stack.peek())
+            
+            elif ele == 'POP':
+                self.stack.pop()
+
+            else:
+                self.stack.push(ele)
+                break
+            
+
+
+    def getValue(self):
+        if self.stack.isEmpty():
+            out = 0
+        else:
+            top_stack = self.stack.peek()
+            if top_stack.isalpha():
+                out = f'Invalid instruction: {top_stack}'
+            else:
+                out = top_stack
+        return out
+
 
 print("* Stack Calculator *")
 arg = input("Enter arguments : ")
