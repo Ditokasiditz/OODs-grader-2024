@@ -1,5 +1,3 @@
-n = 'as 8'
+n = []
 
-x ,y = n.split(' ')
-
-print(f'x={x} and y={y}')
+print(n[-1])
