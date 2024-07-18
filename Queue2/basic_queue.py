@@ -22,6 +22,9 @@ class Queue:
 
     def size(self):
         return len(self.item)
+    
+    def printQueue(self):
+        print(self.item)
 
 
 inp = [ele for ele in input('Enter Input : ').split(',')]
@@ -40,4 +43,4 @@ for ele in inp:
 if queue.isEmpty():
     print('Empty')
 else:
-    print(f'Number in Queue is : {queue.item}')
+    print(f'Number in Queue is : {queue.printQueue()}')
