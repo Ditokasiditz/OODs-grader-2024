@@ -2,7 +2,6 @@ def find_triplets_with_sum_five(arr):
     n = len(arr)
     result = []
     
-    
     # ใช้การวนลูปแบบสามชั้นเพื่อหาชุดของสามพจน์ที่มีผลรวมเท่ากับ 5
     for i in range(n-2):
         for j in range(i+1, n-1):

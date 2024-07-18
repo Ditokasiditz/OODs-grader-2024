@@ -37,23 +37,27 @@ mainRow = Queue(inp)
 c1Row = Queue()
 c2Row =Queue()
 countTime1 = 0
-countTime2 = 0
+countTime2 = False
+
 while not mainRow.isEmpty():
     print(i,end=' ')
     if c1Row.size() < 5 :
         c1Row.enQueue(mainRow.deQueue())
     else:
         c2Row.enQueue(mainRow.deQueue())
+        countTime2 = True
 
     print(mainRow.item,end=' ')
     print(c1Row.item,end=' ')
     print(c2Row.item)
 
+    if countTime2 :
+        countTime1 += 1 
 
     if i % 3 == 0:
         if not c1Row.isEmpty():
             c1Row.deQueue()
-    if i % 2 == 0:
+    if countTime1 % 2 == 0 and countTime2:
         if not c2Row.isEmpty():
             c2Row.deQueue()
 
