@@ -41,7 +41,6 @@ for i in inp:
         
         
     elif i[0] == 'E':
-        # print(i[1],type(i[1]))D
         for j in range(int(i[1:])):
             queue.enQueue(f'*{number}')
             number += 1
