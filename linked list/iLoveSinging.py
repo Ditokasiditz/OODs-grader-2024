@@ -26,7 +26,8 @@ class LinkList:
 
     def removeLast(self):
         if self.head == None:
-            return "Error!!!"
+            print("Error!!!")
+            return None
         if self.head.next == None:
             self.head = None
             self.size -= 1
@@ -39,7 +40,8 @@ class LinkList:
 
     def rename(self, newName):
         if self.head == None:
-            return "Error!!!"
+            print("Error!!!")
+            return None
         else:
             p = self.head
             while p.next != None:
@@ -48,7 +50,7 @@ class LinkList:
 
     def printList(self):
         if self.head == None:
-            print("LinkedList is empty!")
+            print("Linklist is empty!")
         else:
             p = self.head
             while p.next != None:
@@ -57,19 +59,25 @@ class LinkList:
             print(p.value)
 
     def printListWithNoDuplicate(self):
-        p = self.head
-        item_list = []
-        while p.next != None:
+
+        if self.head == None:
+            print("Linklist is empty!")
+
+        else:
+            p = self.head
+            # print("test : ", p.value)
+            item_list = []
+            while p.next != None:
+                item_list.append(p.value)
+                p = p.next
             item_list.append(p.value)
-            p = p.next
-        item_list.append(p.value)
 
-        noDup_list = []
-        [noDup_list.append(x) for x in item_list if x not in noDup_list]
+            noDup_list = []
+            [noDup_list.append(x) for x in item_list if x not in noDup_list]
 
-        for i in noDup_list[:-1]:
-            print(i, end=" -> ")
-        print(noDup_list[-1])
+            for i in noDup_list[:-1]:
+                print(i, end=" -> ")
+            print(noDup_list[-1])
 
 
 def convertToLinkList(ls):

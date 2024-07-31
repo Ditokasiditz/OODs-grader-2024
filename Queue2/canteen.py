@@ -1,8 +1,5 @@
-# Chapter : 4 - item : 4 - Canteen
-
 # โรงอาหารของบริษัทแห่งหนึ่ง จะมีเจ้าหน้าที่คอยจัดแถวสำหรับการซื้ออาหาร โดยจะมีหลักการคือจะดูจากแผนกของพนักงานแต่ละคนว่าอยู่แผนกไหน ถ้าหากในแถวที่ต่ออยู่มีแผนกนั้น จะนำพนักงานคนนั้นแทรกไปด้านหลังของแผนกเดียวกัน ตัวอย่างเช่น
 # Front | 1 2 2 2 2 3 3 3 | Rear  จาก Queue ถ้าหากมีพนักงานแผนก1เข้ามา Queue จะกลายเป็น Front | 1 1 2 2 2 2 3 3 3 | Rear
-
 # Input :
 # จะแบ่งเป็น 2 ฝั่งแบ่งด้วย /   คือ ซ้าย : เป็นแผนกของพนักงานและIDของพนักงานแต่ละคน  ขวา : จะแบ่งเป็น 2 ส่วน คือ D กับ E
 # E < id >  ->   เป็นการนำพนักงานเข้า Queue
@@ -12,89 +9,73 @@
 
 
 class Queue:
-    def __init__(self, items=None):
-        if items:
-            self.items = items
-        else:
-            self.items = []
 
-    def enQueue(self, item):
-        self.items.append(item)
-        return item
+    def __init__(self, list=None):
+        if list == None:
+            self.item = []
+        else:
+            self.item = list
+
+    def __str__(self) -> str:
+        s = ""
+        for i in self.item:
+            s += i
+            s += ","
+        return s
 
     def deQueue(self):
-        if self.isEmpty():
-            return -1
-        return self.items.pop(0)
+        return self.item.pop(0)
 
-    def isEmpty(self):
-        return len(self.items) == 0
+    def enQueue(self, e):
+        self.item.append(e)
 
     def size(self):
-        return len(self.items)
+        return len(self.item)
+
+    def isEmpty(self):
+        return self.item == []
 
 
-def getKey(department_id):
-    for key in employee.keys():
-        if department_id in employee[key]:
-            department = key
-    return department
+inp1, inp2 = input("Enter Input : ").split("/")
+
+start_inp = [e for e in inp1.split(",")]
+action_inp = [e for e in inp2.split(",")]
+
+print(start_inp)
+print(action_inp)
+
+list_panek = []
+
+for i in start_inp:
+    if i[0] in list_panek:
+        pass
+    else:
+        list_panek.append(i[0])
+
+print(list_panek)
+list_allQ = []
+print(len(list_panek))
 
 
-q1 = Queue()
+for i in range(len(list_panek)):
+    print(i)
+    q = Queue()
+    list_allQ.append(q)
 
-left, right = input("Enter Input : ").split("/")
+for i in list_allQ:
+    print("++ ", i)
+    for j in start_inp:
+        # print(type(i))
 
-employee = {}
+        i.enQueue(j)
+
+# print(list_allQ[1])
 
 
-for condition in left.split(","):
-    department, department_id = condition.split(" ")
-    try:
-        employee[department].append(department_id)
-    except:
-        employee[department] = [department_id]
+# for i in start_inp:
+#     for j in list_panek:
+#         if i[0] == j:
+#             list_allQ[j].append(i[2:])
 
-for condition in right.split(","):
-    try:
-        opt, department_id = condition.split(" ")
-    except:
-        opt = condition
-    if opt == "D":
-        # print(q1.items)
-        check = q1.deQueue()
-        if check == -1:
-            print("Empty")
-        else:
-            print(check)
-    elif opt == "E":
-        if q1.isEmpty():
-            q1.enQueue(department_id)
-            continue
-        department = getKey(department_id)
-        q2 = Queue()
-        check = False
-        ok = False
-        for i in range(q1.size()):
-            department_id_q1 = q1.deQueue()
-            department_q1 = getKey(department_id_q1)
-            if department != department_q1:
-                if check:
-                    q2.enQueue(department_id)
-                    check = False
-                    ok = True
-                q2.enQueue(department_id_q1)
-            elif department == department_q1:
-                q2.enQueue(department_id_q1)
-                check = True
-        else:
-            if not ok:
-                q2.enQueue(department_id)
 
-        for i in range(q1.size()):
-            q2.enQueue(q1.deQueue())
-
-        for i in range(q2.size()):
-            q1.enQueue(q2.deQueue())
-
-print(employee)
+# print(list_allQ)
