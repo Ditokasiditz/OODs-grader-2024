@@ -9,6 +9,12 @@ class Stack:
         else:
             self.item = list
 
+    def __str__(self):
+        s = ""
+        for i in self.item:
+            s += str(i) + " "
+        return s
+
     def push(self, e):
         self.item.append(e)
 
@@ -42,7 +48,7 @@ for e in inp:
             stack.push(leftOP * rightOP)
         if e == "/":
             stack.push(leftOP / rightOP)
-        print(stack.item)
+        print(stack)
 
 
 # print(stack.item)
