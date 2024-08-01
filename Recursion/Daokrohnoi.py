@@ -11,11 +11,23 @@
 
 # ****ห้ามใช้คำสั่ง for, while, do while*****
 
+
 # หมายเหตุ ฟังก์ชันมี parameter ได้ไม่เกิน 2 ตัว
-
-
 def asteroid_collision(asts):
-    pass
+    def collide(stack, asts):
+        if not asts:
+            return stack
+        asteroid = asts[0]
+        if not stack or asteroid > 0 or stack[-1] < 0:
+            return collide(stack + [asteroid], asts[1:])
+        elif stack[-1] == -asteroid:
+            return collide(stack[:-1], asts[1:])
+        elif stack[-1] > -asteroid:
+            return collide(stack, asts[1:])
+        else:
+            return collide(stack[:-1], asts)
+
+    return collide([], asts)
 
 
 x = input("Enter Input : ").split(",")

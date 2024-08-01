@@ -3,28 +3,39 @@
 # ปล. ใช้ฟังก์ชั่น sort ได้ (ควร)
 
 
-def generate_numbers(sequence, current=""):
-    result = []
+def generate_combinations(numbers):
+    def recursive_combinations(prefix, remaining):
+        if prefix:
+            combinations.add(int("".join(map(str, prefix))))
+        for i in range(len(remaining)):
+            new_prefix = prefix + [remaining[i]]
+            new_remaining = remaining[:i] + remaining[i + 1 :]
+            recursive_combinations(new_prefix, new_remaining)
 
-    if current:
-        result.append(int(current))
+    combinations = set()  # ใช้ set เพื่อป้องกันค่าซ้ำ
+    sorted_numbers = sorted(numbers)
+    recursive_combinations([], sorted_numbers)
 
-    for i in range(len(sequence)):
-        next_current = current + sequence[i]
-        remaining = sequence[:i] + sequence[i + 1 :]
-        result.extend(generate_numbers(remaining, next_current))
-
-    return result
+    if len(combinations) == 0:
+        return None
+    else:
+        return sorted(combinations)
 
 
-input_numbers = input("Enter digits : ")
+def main():
+    input_digits = input("Enter digits : ").split()
 
-digits = input_numbers.split()
-if not all(d.isdigit() for d in digits):
-    print("Invalid input")
-else:
-    all_numbers = generate_numbers(digits)
+    if all(digit.isdigit() for digit in input_digits) and all(
+        int(e) <= 10 for e in input_digits
+    ):
 
-    unique_numbers = sorted(set(all_numbers))
+        numbers = [int(digit) for digit in input_digits]
+        all_combinations = generate_combinations(numbers)
+        print("Output :", all_combinations)
 
-    print("Output :", unique_numbers)
+    else:
+        print("Invalid input")
+
+
+# เรียกใช้ฟังก์ชันหลัก
+main()
